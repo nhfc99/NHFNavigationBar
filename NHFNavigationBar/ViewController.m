@@ -23,9 +23,9 @@ UIViewController *viewController = [NSClassFromString(controller) new];\
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.popGestureRecognizerEnable = true;
-    [self setNhfBarTintColor:[UIColor yellowColor] alpha:1];
-    self.nhfHidBar = false;
+//    self.popGestureRecognizerEnable = true;
+//    [self setNhfBarTintColor:[UIColor yellowColor] alpha:1];
+//    self.nhfHidBar = false;
 }
 
 - (void)viewDidLoad {
@@ -38,7 +38,7 @@ UIViewController *viewController = [NSClassFromString(controller) new];\
     [button setCenter:CGPointMake([UIScreen mainScreen].bounds.size.width/2, [UIScreen mainScreen].bounds.size.height/2)];
     [self.view addSubview:button];
     
-    [self.view setBackgroundColor:[UIColor orangeColor]];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
 }
 
 - (void)buttonAction {
