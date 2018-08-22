@@ -116,7 +116,7 @@ static const NSInteger fontSize = 17;
 }
 
 - (void)setNhfShadowImageAlpha:(CGFloat)nhfShadowImageAlpha {
-    UIColor *color = [UIColor colorWithRed:250.f/255.0f green:250.f/255.0f blue:250.f/255.0f alpha:nhfShadowImageAlpha];
+    UIColor *color = [UIColor colorWithRed:207.f/255.0f green:207.f/255.0f blue:207.f/255.0f alpha:nhfShadowImageAlpha];
     [self.navigationController.navigationBar setShadowImage:[UIImage nhfImageWithColor:color]];
     
     objc_setAssociatedObject(self, kShadowImageAlpha, [NSNumber numberWithFloat:nhfShadowImageAlpha],OBJC_ASSOCIATION_ASSIGN);
