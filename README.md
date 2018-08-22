@@ -111,10 +111,7 @@
 <li>@param color --</li>
 <li>@param font --</li>
 <li>*/</li>
-<li>- (void)addLeftItemTitle:(NSString*)title</li>
-<li>action:(SEL)action</li>
-<li>color:(UIColor *)color</li>
-<li>font:(UIFont *)font;</li>
+<li>- (void)addLeftItemTitle:(NSString*)title action:(SEL)action color:(UIColor *)color font:(UIFont *)font;</li>
 </ul>
 
 <ul>
@@ -138,10 +135,7 @@
 <li>@param color --</li>
 <li>@param font --</li>
 <li>*/</li>
-<li>- (void)addRightItemTitle:(NSString*)title</li>
-<li>action:(SEL)action</li>
-<li>color:(UIColor *)color</li>
-<li>font:(UIFont *)font;</li>
+<li>- (void)addRightItemTitle:(NSString*)title action:(SEL)action color:(UIColor *)color font:(UIFont *)font;</li>
 </ul>
 
 <ul>
@@ -163,8 +157,5 @@
 <li>@param color --</li>
 <li>@param font --</li>
 <li>*/</li>
-<li>- (void)setRightItemTitle:(NSString *)title</li>
-<li>action:(SEL)action</li>
-<li>color:(UIColor *)color</li>
-<li>font:(UIFont *)font;</li>
+<li>- (void)setRightItemTitle:(NSString *)title  action:(SEL)action color:(UIColor *)color font:(UIFont *)font;</li>
 </ul>
