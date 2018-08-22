@@ -1,0 +1,394 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		60917552212CF14700BBCA70 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 60917551212CF14700BBCA70 /* AppDelegate.m */; };
+		60917555212CF14700BBCA70 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60917554212CF14700BBCA70 /* ViewController.m */; };
+		60917558212CF14700BBCA70 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60917556212CF14700BBCA70 /* Main.storyboard */; };
+		6091755A212CF14A00BBCA70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60917559212CF14A00BBCA70 /* Assets.xcassets */; };
+		6091755D212CF14A00BBCA70 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6091755B212CF14A00BBCA70 /* LaunchScreen.storyboard */; };
+		60917560212CF14A00BBCA70 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6091755F212CF14A00BBCA70 /* main.m */; };
+		60917570212CF16D00BBCA70 /* NHFNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6091756B212CF16D00BBCA70 /* NHFNavigationController.m */; };
+		60917571212CF16D00BBCA70 /* UIImage+NHF.m in Sources */ = {isa = PBXBuildFile; fileRef = 6091756C212CF16D00BBCA70 /* UIImage+NHF.m */; };
+		60917572212CF16D00BBCA70 /* UINavigationBar+NHF.m in Sources */ = {isa = PBXBuildFile; fileRef = 6091756D212CF16D00BBCA70 /* UINavigationBar+NHF.m */; };
+		60917573212CF16D00BBCA70 /* UIViewController+NHF.m in Sources */ = {isa = PBXBuildFile; fileRef = 6091756E212CF16D00BBCA70 /* UIViewController+NHF.m */; };
+		60917577212CF1C200BBCA70 /* EXViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60917576212CF1C200BBCA70 /* EXViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6091754D212CF14700BBCA70 /* NHFNavigationBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NHFNavigationBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		60917550212CF14700BBCA70 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		60917551212CF14700BBCA70 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		60917553212CF14700BBCA70 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		60917554212CF14700BBCA70 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		60917557212CF14700BBCA70 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		60917559212CF14A00BBCA70 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6091755C212CF14A00BBCA70 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6091755E212CF14A00BBCA70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6091755F212CF14A00BBCA70 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		60917568212CF16D00BBCA70 /* UINavigationBar+NHF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+NHF.h"; sourceTree = "<group>"; };
+		60917569212CF16D00BBCA70 /* UIViewController+NHF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+NHF.h"; sourceTree = "<group>"; };
+		6091756A212CF16D00BBCA70 /* UIImage+NHF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+NHF.h"; sourceTree = "<group>"; };
+		6091756B212CF16D00BBCA70 /* NHFNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHFNavigationController.m; sourceTree = "<group>"; };
+		6091756C212CF16D00BBCA70 /* UIImage+NHF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+NHF.m"; sourceTree = "<group>"; };
+		6091756D212CF16D00BBCA70 /* UINavigationBar+NHF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+NHF.m"; sourceTree = "<group>"; };
+		6091756E212CF16D00BBCA70 /* UIViewController+NHF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+NHF.m"; sourceTree = "<group>"; };
+		6091756F212CF16D00BBCA70 /* NHFNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHFNavigationController.h; sourceTree = "<group>"; };
+		60917575212CF1C200BBCA70 /* EXViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EXViewController.h; sourceTree = "<group>"; };
+		60917576212CF1C200BBCA70 /* EXViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EXViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6091754A212CF14700BBCA70 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		60917544212CF14700BBCA70 = {
+			isa = PBXGroup;
+			children = (
+				60917566212CF15800BBCA70 /* Class */,
+				6091754F212CF14700BBCA70 /* NHFNavigationBar */,
+				6091754E212CF14700BBCA70 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6091754E212CF14700BBCA70 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6091754D212CF14700BBCA70 /* NHFNavigationBar.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6091754F212CF14700BBCA70 /* NHFNavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				60917574212CF1A000BBCA70 /* EXViewController */,
+				60917550212CF14700BBCA70 /* AppDelegate.h */,
+				60917551212CF14700BBCA70 /* AppDelegate.m */,
+				60917553212CF14700BBCA70 /* ViewController.h */,
+				60917554212CF14700BBCA70 /* ViewController.m */,
+				60917556212CF14700BBCA70 /* Main.storyboard */,
+				60917559212CF14A00BBCA70 /* Assets.xcassets */,
+				6091755B212CF14A00BBCA70 /* LaunchScreen.storyboard */,
+				6091755E212CF14A00BBCA70 /* Info.plist */,
+				6091755F212CF14A00BBCA70 /* main.m */,
+			);
+			path = NHFNavigationBar;
+			sourceTree = "<group>";
+		};
+		60917566212CF15800BBCA70 /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				60917567212CF16D00BBCA70 /* NHFNavigationBar */,
+			);
+			path = Class;
+			sourceTree = "<group>";
+		};
+		60917567212CF16D00BBCA70 /* NHFNavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				60917568212CF16D00BBCA70 /* UINavigationBar+NHF.h */,
+				6091756D212CF16D00BBCA70 /* UINavigationBar+NHF.m */,
+				60917569212CF16D00BBCA70 /* UIViewController+NHF.h */,
+				6091756E212CF16D00BBCA70 /* UIViewController+NHF.m */,
+				6091756F212CF16D00BBCA70 /* NHFNavigationController.h */,
+				6091756B212CF16D00BBCA70 /* NHFNavigationController.m */,
+				6091756A212CF16D00BBCA70 /* UIImage+NHF.h */,
+				6091756C212CF16D00BBCA70 /* UIImage+NHF.m */,
+			);
+			path = NHFNavigationBar;
+			sourceTree = "<group>";
+		};
+		60917574212CF1A000BBCA70 /* EXViewController */ = {
+			isa = PBXGroup;
+			children = (
+				60917575212CF1C200BBCA70 /* EXViewController.h */,
+				60917576212CF1C200BBCA70 /* EXViewController.m */,
+			);
+			path = EXViewController;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6091754C212CF14700BBCA70 /* NHFNavigationBar */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 60917563212CF14A00BBCA70 /* Build configuration list for PBXNativeTarget "NHFNavigationBar" */;
+			buildPhases = (
+				60917549212CF14700BBCA70 /* Sources */,
+				6091754A212CF14700BBCA70 /* Frameworks */,
+				6091754B212CF14700BBCA70 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NHFNavigationBar;
+			productName = NHFNavigationBar;
+			productReference = 6091754D212CF14700BBCA70 /* NHFNavigationBar.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		60917545212CF14700BBCA70 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = "网络科技";
+				TargetAttributes = {
+					6091754C212CF14700BBCA70 = {
+						CreatedOnToolsVersion = 9.4.1;
+					};
+				};
+			};
+			buildConfigurationList = 60917548212CF14700BBCA70 /* Build configuration list for PBXProject "NHFNavigationBar" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 60917544212CF14700BBCA70;
+			productRefGroup = 6091754E212CF14700BBCA70 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6091754C212CF14700BBCA70 /* NHFNavigationBar */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6091754B212CF14700BBCA70 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6091755D212CF14A00BBCA70 /* LaunchScreen.storyboard in Resources */,
+				6091755A212CF14A00BBCA70 /* Assets.xcassets in Resources */,
+				60917558212CF14700BBCA70 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		60917549212CF14700BBCA70 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				60917572212CF16D00BBCA70 /* UINavigationBar+NHF.m in Sources */,
+				60917577212CF1C200BBCA70 /* EXViewController.m in Sources */,
+				60917571212CF16D00BBCA70 /* UIImage+NHF.m in Sources */,
+				60917570212CF16D00BBCA70 /* NHFNavigationController.m in Sources */,
+				60917555212CF14700BBCA70 /* ViewController.m in Sources */,
+				60917573212CF16D00BBCA70 /* UIViewController+NHF.m in Sources */,
+				60917560212CF14A00BBCA70 /* main.m in Sources */,
+				60917552212CF14700BBCA70 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		60917556212CF14700BBCA70 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				60917557212CF14700BBCA70 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		6091755B212CF14A00BBCA70 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6091755C212CF14A00BBCA70 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		60917561212CF14A00BBCA70 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		60917562212CF14A00BBCA70 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		60917564212CF14A00BBCA70 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DU5XLJ4CM8;
+				INFOPLIST_FILE = NHFNavigationBar/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nhf.NHFNavigationBar;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		60917565212CF14A00BBCA70 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = DU5XLJ4CM8;
+				INFOPLIST_FILE = NHFNavigationBar/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.nhf.NHFNavigationBar;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		60917548212CF14700BBCA70 /* Build configuration list for PBXProject "NHFNavigationBar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				60917561212CF14A00BBCA70 /* Debug */,
+				60917562212CF14A00BBCA70 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		60917563212CF14A00BBCA70 /* Build configuration list for PBXNativeTarget "NHFNavigationBar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				60917564212CF14A00BBCA70 /* Debug */,
+				60917565212CF14A00BBCA70 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 60917545212CF14700BBCA70 /* Project object */;
+}
