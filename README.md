@@ -9,125 +9,162 @@
 
 <h2>使用方法</h2>
 
-//隐藏导航栏
-@property (nonatomic, assign) BOOL nhfHidBar;
 
-//TintColor
-@property (nonatomic, strong) UIColor *nhfTintColor;
+<ul>
+<li>//隐藏导航栏</li>
+<li>@property (nonatomic, assign) BOOL nhfHidBar;</li>
+</ul>
 
-
-//BarTintColor
-@property (nonatomic, strong, readonly) UIColor *nhfBarTintColor;
-
-
-//TitleColor
-@property (nonatomic, strong) UIColor *nhfTitleColor;
+<ul>
+<li>//TintColor</li>
+<li>@property (nonatomic, strong) UIColor *nhfTintColor;</li>
+</ul>
 
 
-//控制滑动返回
-@property (nonatomic, assign) BOOL popGestureRecognizerEnable;
+<ul>
+<li>//BarTintColor</li>
+<li>@property (nonatomic, strong, readonly) UIColor *nhfBarTintColor;</li>
+</ul>
 
 
-//是否隐藏导航栏底部的线条
-@property (nonatomic, assign) CGFloat nhfShadowImageAlpha;
+<ul>
+<li>//TitleColor</li>
+<li>@property (nonatomic, strong) UIColor *nhfTitleColor;</li>
+</ul>
 
 
-//设置标题属性
-@property (nonatomic, strong) NSDictionary *nhfTitleTextAttributes;
+<ul>
+<li>//控制滑动返回</li>
+<li>@property (nonatomic, assign) BOOL popGestureRecognizerEnable;</li>
+</ul>
 
 
-//设置状态栏
-@property (nonatomic, assign) UIStatusBarStyle nhfStatusBarStyle;
+<ul>
+<li>//是否隐藏导航栏底部的线条</li>
+<li>@property (nonatomic, assign) CGFloat nhfShadowImageAlpha;</li>
+</ul>
 
 
-//获取导航栏背景透明度
-@property (nonatomic, assign, readonly) CGFloat nhfNavBarAlpha;
+<ul>
+<li>//设置标题属性</li>
+<li>@property (nonatomic, strong) NSDictionary *nhfTitleTextAttributes;</li>
+</ul>
 
 
-//导航栏背景图片
-@property (nonatomic, strong, readonly) UIImage *nhfBarBackgroundImage;
+<ul>
+<li>//设置状态栏</li>
+<li>@property (nonatomic, assign) UIStatusBarStyle nhfStatusBarStyle;</li>
+</ul>
 
 
-/**
-设置导航栏背景颜色（单一色调）以及透明度
-
-@param color --
-@param alpha --
-*/
-- (void)setNhfBarTintColor:(UIColor *)color alpha:(CGFloat)alpha;
+<ul>
+<li>//获取导航栏背景透明度</li>
+<li>@property (nonatomic, assign, readonly) CGFloat nhfNavBarAlpha;</li>
+</ul>
 
 
-/**
-设置导航栏背景图片以及透明度
+<ul>
+<li>//导航栏背景图片</li>
+<li>@property (nonatomic, strong, readonly) UIImage *nhfBarBackgroundImage;</li>
+</ul>
 
-@param image --
-@param alpha --
-*/
-- (void)setNhfBarBackgroundImage:(UIImage *)image alpha:(CGFloat)alpha;
+
+<ul>
+<li>/**</li>
+<li>设置导航栏背景颜色（单一色调）以及透明度</li>
+
+<li>@param color --</li>
+<li>@param alpha --</li>
+<li>*/</li>
+<li>- (void)setNhfBarTintColor:(UIColor *)color alpha:(CGFloat)alpha;</li>
+</ul>
+
+
+<ul>
+<li>/**</li>
+<li>设置导航栏背景图片以及透明度</li>
+
+<li>@param image --</li>
+<li>@param alpha --</li>
+<li>*/</li>
+<li>- (void)setNhfBarBackgroundImage:(UIImage *)image alpha:(CGFloat)alpha;</li>
+</ul>
 
 //左边
-/**
-自定义返回按钮
+<ul>
+<li>/**</li>
+<li>自定义返回按钮</li>
 
-@param image --
-@param action --
-*/
-- (void)setLeftItemImage:(UIImage *)image action:(SEL)action;
+<li>@param image --</li>
+<li>@param action --</li>
+<li>*/</li>
+<li>- (void)setLeftItemImage:(UIImage *)image action:(SEL)action;</li>
+</ul>
 
 
-/**
-添加左边文字按钮
+<ul>
+<li>/**</li>
+<li>添加左边文字按钮</li>
 
-@param title --
-@param action --
-@param color --
-@param font --
-*/
-- (void)addLeftItemTitle:(NSString*)title
-action:(SEL)action
-color:(UIColor *)color
-font:(UIFont *)font;
+<li>@param title --</li>
+<li>@param action --</li>
+<li>@param color --</li>
+<li>@param font --</li>
+<li>*/</li>
+<li>- (void)addLeftItemTitle:(NSString*)title</li>
+<li>action:(SEL)action</li>
+<li>color:(UIColor *)color</li>
+<li>font:(UIFont *)font;</li>
+</ul>
 
-/**
-添加左边图片按钮
+<ul>
+<li>/**</li>
+<li>添加左边图片按钮</li>
 
-@param image --
-@param action --
-*/
-- (void)addLeftItemImage:(UIImage *)image action:(SEL)action;
+<li>@param image --</li>
+<li>@param action --</li>
+<li>*/</li>
+<li>- (void)addLeftItemImage:(UIImage *)image action:(SEL)action;</li>
+</ul>
 
 
 //右边
-/**
-添加右边的按钮添加文字
+<ul>
+<li>/**</li>
+添加右边的按钮添加文字</li>
 
-@param title --
-@param action --
-@param color --
-@param font --
-*/
-- (void)addRightItemTitle:(NSString*)title
-action:(SEL)action
-color:(UIColor *)color
-font:(UIFont *)font;
+<li>@param title --</li>
+<li>@param action --</li>
+<li>@param color --</li>
+<li>@param font --</li>
+<li>*/</li>
+<li>- (void)addRightItemTitle:(NSString*)title</li>
+<li>action:(SEL)action</li>
+<li>color:(UIColor *)color</li>
+<li>font:(UIFont *)font;</li>
+</ul>
 
-/**
-添加右边的按钮添加图片
+<ul>
+<li>/**</li>
+<li>添加右边的按钮添加图片</li>
 
-@param image --
-@param action --
-*/
-- (void)addRightItemImage:(UIImage *)image action:(SEL)action;
+<li>@param image --</li>
+<li>@param action --</li>
+<li>*/</li>
+<li>- (void)addRightItemImage:(UIImage *)image action:(SEL)action;</li>
+</ul>
 
-/**
-设置右边的按钮
+<ul>
+<li>/**
+<li>设置右边的按钮</li>
 
-@param title --
-@param action --
-@param color --
-@param font --
-*/
-- (void)setRightItemTitle:(NSString *)title
-action:(SEL)action
-color:(UIColor *)color
-font:(UIFont *)font;
+<li>@param title --</li>
+<li>@param action --</li>
+<li>@param color --</li>
+<li>@param font --</li>
+<li>*/</li>
+<li>- (void)setRightItemTitle:(NSString *)title</li>
+<li>action:(SEL)action</li>
+<li>color:(UIColor *)color</li>
+<li>font:(UIFont *)font;</li>
+</ul>
