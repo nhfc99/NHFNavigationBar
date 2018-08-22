@@ -158,7 +158,7 @@ static const NSInteger fontSize = 17;
 }
 
 - (void)setNhfNavBarAlpha:(CGFloat)nhfNavBarAlpha {
-    [self.navigationController.navigationBar setShadowImage:[UIImage nhfImageWithColor:[UIColor colorWithWhite:0 alpha:nhfNavBarAlpha]]];
+    self.nhfShadowImageAlpha = nhfNavBarAlpha;
     objc_setAssociatedObject(self, kNavBarAlpha, [NSNumber numberWithFloat:nhfNavBarAlpha],OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
