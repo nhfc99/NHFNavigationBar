@@ -8,24 +8,42 @@
 </ul>
 
 <h2>使用方法</h2>
+
 //隐藏导航栏
 @property (nonatomic, assign) BOOL nhfHidBar;
+
 //TintColor
 @property (nonatomic, strong) UIColor *nhfTintColor;
+
+
 //BarTintColor
 @property (nonatomic, strong, readonly) UIColor *nhfBarTintColor;
+
+
 //TitleColor
 @property (nonatomic, strong) UIColor *nhfTitleColor;
+
+
 //控制滑动返回
 @property (nonatomic, assign) BOOL popGestureRecognizerEnable;
+
+
 //是否隐藏导航栏底部的线条
 @property (nonatomic, assign) CGFloat nhfShadowImageAlpha;
+
+
 //设置标题属性
 @property (nonatomic, strong) NSDictionary *nhfTitleTextAttributes;
+
+
 //设置状态栏
 @property (nonatomic, assign) UIStatusBarStyle nhfStatusBarStyle;
+
+
 //获取导航栏背景透明度
 @property (nonatomic, assign, readonly) CGFloat nhfNavBarAlpha;
+
+
 //导航栏背景图片
 @property (nonatomic, strong, readonly) UIImage *nhfBarBackgroundImage;
 
