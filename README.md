@@ -3,7 +3,7 @@
 <p>IOS布局相关方面的</p>
 <h2>安装</h2>
 <ul>
-<li>pod 'NHFDevice'</li>
+<li>pod 'NHFNavigationBar'</li>
 <li>手动下载然后将文件夹拖至工程中即可</li>
 </ul>
 
