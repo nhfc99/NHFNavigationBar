@@ -119,8 +119,11 @@
 }
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    if (!self.popGestureRecognizerEnable) {
+        return NO;
+    }
     if (self.childViewControllers.count<=1) {
-        return NO ;
+        return NO;
     }
     return YES;
 }
