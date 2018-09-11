@@ -6,100 +6,135 @@
 //  Copyright © 2018年 网络科技. All rights reserved.
 //
 
+#define  coverAlpha 0.8
+
 #import "NHFNavigationController.h"
 #import "UINavigationBar+NHF.h"
 #import "UIViewController+NHF.h"
 
 @interface NHFNavigationController () <UIGestureRecognizerDelegate, UINavigationControllerDelegate>
 
-@property(nonatomic, strong) NSMutableArray *blackList;
-@property(nonatomic, retain) UIPanGestureRecognizer *fullScreenGes;
+@property (nonatomic, strong) NSMutableArray *lastVCScreenShootArray;
+@property (nonatomic, strong) UIImageView *lastVCScreenShootImageView;
+@property (nonatomic, strong) UIView *lastVCScreenCoverView;
 
 @end
 
 @implementation NHFNavigationController
 
-#pragma mark - Lazy load
-- (NSMutableArray *)blackList {
-    if (!_blackList) {
-        _blackList = [NSMutableArray array];
+//截频资源
+- (NSMutableArray *)lastVCScreenShootArray {
+    if (!_lastVCScreenShootArray) {
+        _lastVCScreenShootArray = [[NSMutableArray alloc] initWithCapacity:0];
     }
-    return _blackList;
+    return _lastVCScreenShootArray;
 }
 
-#pragma mark - Public
-- (void)addFullScreenPopBlackListItem:(UIViewController *)viewController {
-    if (!viewController) {
-        return ;
-    }
-    [self.blackList addObject:viewController];
+//进行截频
+- (void)takeScreenShoot {
+    UIGraphicsBeginImageContextWithOptions(self.view.bounds.size,NO,0);
+    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage * newScreenSnapImg = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    [self.lastVCScreenShootArray addObject:newScreenSnapImg];
 }
 
-- (void)removeFromFullScreenPopBlackList:(UIViewController *)viewController {
-    for (UIViewController *vc in self.blackList) {
-        if (vc == viewController) {
-            [self.blackList removeObject:vc];
-        }
+//最后一张截频
+- (UIImageView *)lastVCScreenShootImageView {
+    if (!_lastVCScreenShootImageView) {
+        UIImageView *shootImageView = [[UIImageView alloc] init];
+        shootImageView.frame = self.view.bounds;
+        
+        [self.view.superview addSubview:shootImageView];
+        [self.view.superview insertSubview:shootImageView atIndex:0];
+        
+        [self.view.superview insertSubview:self.lastVCScreenCoverView atIndex:1];
+        _lastVCScreenShootImageView = shootImageView;
     }
+    
+    return _lastVCScreenShootImageView;
 }
 
-#pragma mark - Life cycle
+//图片上边的一张图片
+- (UIView *)lastVCScreenCoverView {
+    if (!_lastVCScreenCoverView) {
+        UIView *converView = [[UIView alloc] init];
+        converView.backgroundColor = [UIColor grayColor];
+        converView.frame = self.view.bounds;
+        converView.alpha = coverAlpha;
+        [self.view.superview addSubview:converView];
+        _lastVCScreenCoverView = converView;
+    }
+    
+    return _lastVCScreenCoverView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.interactivePopGestureRecognizer.delegate = self;
     [self.navigationBar setTranslucent:YES];
     
-    id target = self.interactivePopGestureRecognizer.delegate;
-    SEL handler = NSSelectorFromString(@"handleNavigationTransition:");
-    _fullScreenGes = [[UIPanGestureRecognizer alloc] initWithTarget:target action:handler];
-    _fullScreenGes.delegate = self;
-    
-    self.fullPop = false;
+    self.interactivePopGestureRecognizer.enabled = NO;
+    [self addPanGestureRecognizer];
 }
 
-- (void)setFullPop:(BOOL)fullPop {
-    _fullPop = fullPop;
-    
-    UIView *targetView = self.interactivePopGestureRecognizer.view;
-    if (fullPop) {
-        [targetView addGestureRecognizer:_fullScreenGes];
-        [self.interactivePopGestureRecognizer setEnabled:NO];
-    } else {
-        self.interactivePopGestureRecognizer.delegate = self;
-        [self.interactivePopGestureRecognizer setEnabled:YES];
-        [targetView removeGestureRecognizer:_fullScreenGes];
-    }
+//添加手势
+- (void)addPanGestureRecognizer {
+    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(popViewController:)];
+    panGestureRecognizer.delegate = self;
+    [self.view addGestureRecognizer:panGestureRecognizer];
 }
 
-#pragma mark - UIGestureRecognizerDelegate
-
-- (BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)gestureRecognizer {
-    if (_fullPop) {
-        for (UIViewController *viewController in self.blackList) {
-            if ([self topViewController] == viewController) {
-                return NO;
+- (void)popViewController:(UIPanGestureRecognizer *)recognizer {
+    CGPoint transition = [recognizer translationInView:self.view];
+    if (transition.x > 0) {
+        self.view.transform = CGAffineTransformMakeTranslation(transition.x, 0);
+        self.lastVCScreenShootImageView.image = [self.lastVCScreenShootArray lastObject];
+        
+        self.lastVCScreenCoverView.alpha = coverAlpha * (1 - transition.x / self.view.frame.size.width);
+        
+        if (recognizer.state == UIGestureRecognizerStateEnded) {
+            if (transition.x > self.view.frame.size.width / 3) {
+                [UIView animateWithDuration:0.25 animations:^{
+                    self.lastVCScreenCoverView.alpha = 0;
+                    self.view.transform = CGAffineTransformMakeTranslation(self.view.frame.size.width, 0);
+                } completion:^(BOOL finished) {
+                    self.view.transform = CGAffineTransformIdentity;
+                    [super popViewControllerAnimated:NO];
+                    
+                    [self.lastVCScreenShootArray removeLastObject];
+                }];
+            } else {
+                [UIView animateWithDuration:0.25 animations:^{
+                    self.lastVCScreenCoverView.alpha = coverAlpha;
+                    self.view.transform = CGAffineTransformIdentity;
+                } completion:^(BOOL finished) {
+                    
+                }];
             }
         }
-        
-        if ([[self valueForKey:@"_isTransitioning"] boolValue]) {
-            return NO;
-        }
-        CGPoint translation = [gestureRecognizer translationInView:gestureRecognizer.view];
-        if (translation.x <= 0) {
-            return NO;
-        }
-        return self.childViewControllers.count == 1 ? NO : YES;
-    } else {
-        if (self.viewControllers.count > 1) {
-            UIViewController *viewController = self.topViewController;
-            BOOL value = viewController.popGestureRecognizerEnable;
-            return value;
-        }
-        return NO;
     }
 }
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    if (self.childViewControllers.count<=1) {
+        return NO ;
+    }
+    return YES;
+}
+
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    [self takeScreenShoot];
+    [super pushViewController:viewController animated:animated];
+}
+
+- (UIViewController *)popViewControllerAnimated:(BOOL)animated{
+    [self.lastVCScreenShootArray removeLastObject];
+    return [super popViewControllerAnimated:animated];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
