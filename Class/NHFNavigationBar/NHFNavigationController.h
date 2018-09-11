@@ -10,4 +10,7 @@
 
 @interface NHFNavigationController : UINavigationController
 
+//是否是全屏返回
+@property (nonatomic, assign) BOOL fullPop;
+
 @end
