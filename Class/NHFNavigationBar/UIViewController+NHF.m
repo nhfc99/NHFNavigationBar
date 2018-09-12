@@ -107,6 +107,7 @@ static const NSInteger fontSize = 17;
 }
 
 - (void)setPopGestureRecognizerEnable:(BOOL)popGestureRecognizerEnable {
+    ((NHFNavigationController *)self.navigationController).popGestureRecognizerEnable = popGestureRecognizerEnable;
     objc_setAssociatedObject(self, kPopGestureRecognizerEnable, [NSNumber numberWithBool:popGestureRecognizerEnable],OBJC_ASSOCIATION_ASSIGN);
 }
 
