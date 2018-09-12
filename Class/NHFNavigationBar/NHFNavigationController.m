@@ -6,7 +6,7 @@
 //  Copyright © 2018年 网络科技. All rights reserved.
 //
 
-#define  coverAlpha 0.8
+#define  NHFCoverAlpha 0.8
 
 #import "NHFNavigationController.h"
 #import "UINavigationBar+NHF.h"
@@ -61,7 +61,7 @@
         UIView *converView = [[UIView alloc] init];
         converView.backgroundColor = [UIColor grayColor];
         converView.frame = self.view.bounds;
-        converView.alpha = coverAlpha;
+        converView.alpha = NHFCoverAlpha;
         [self.view.superview addSubview:converView];
         _lastVCScreenCoverView = converView;
     }
@@ -93,7 +93,7 @@
         self.view.transform = CGAffineTransformMakeTranslation(transition.x, 0);
         self.lastVCScreenShootImageView.image = [self.lastVCScreenShootArray lastObject];
         
-        self.lastVCScreenCoverView.alpha = coverAlpha * (1 - transition.x / self.view.frame.size.width);
+        self.lastVCScreenCoverView.alpha = NHFCoverAlpha * (1 - transition.x / self.view.frame.size.width);
         
         if (recognizer.state == UIGestureRecognizerStateEnded) {
             if (transition.x > self.view.frame.size.width / 3) {
@@ -108,7 +108,7 @@
                 }];
             } else {
                 [UIView animateWithDuration:0.25 animations:^{
-                    self.lastVCScreenCoverView.alpha = coverAlpha;
+                    self.lastVCScreenCoverView.alpha = NHFCoverAlpha;
                     self.view.transform = CGAffineTransformIdentity;
                 } completion:^(BOOL finished) {
                     
