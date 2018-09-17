@@ -116,6 +116,15 @@
                     color:(UIColor *)color
                      font:(UIFont *)font;
 
+
+/**
+ 设置右边的图片按钮
+
+ @param image --
+ @param action --
+ */
+- (void)setRightItemImage:(UIImage *)image action:(SEL)action;
+
 @end
 
 

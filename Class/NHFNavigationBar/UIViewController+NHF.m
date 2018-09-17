@@ -256,6 +256,13 @@ NSArray *allSubviews(UIView *aView) {
     self.navigationItem.rightBarButtonItems = items;
 }
 
+- (void)setRightItemImage:(UIImage *)image action:(SEL)action {
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:[image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]  style:UIBarButtonItemStylePlain target:self action:action];
+    NSMutableArray *items = [NSMutableArray new];
+    [items addObject:item];
+    self.navigationItem.rightBarButtonItems = items;
+}
+
 @end
 
 
