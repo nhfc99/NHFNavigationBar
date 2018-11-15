@@ -10,4 +10,14 @@
 
 @interface NHFNavigationController : UINavigationController
 
+@property (nonatomic, retain) UIScreenEdgePanGestureRecognizer *panGestureRecognizer;
+
+
+/**
+ 解决手势冲突问题
+
+ @param view
+ */
+- (void)requireGestureRecognizerToFailByScrollView:(UIScrollView *)scrollView;
+
 @end

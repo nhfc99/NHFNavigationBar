@@ -82,9 +82,10 @@
 
 //添加手势
 - (void)addPanGestureRecognizer {
-    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(popViewController:)];
-    panGestureRecognizer.delegate = self;
-    [self.view addGestureRecognizer:panGestureRecognizer];
+    _panGestureRecognizer = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self action:@selector(popViewController:)];
+    _panGestureRecognizer.edges = UIRectEdgeLeft;
+    _panGestureRecognizer.delegate = self;
+    [self.view addGestureRecognizer:_panGestureRecognizer];
 }
 
 - (void)popViewController:(UIPanGestureRecognizer *)recognizer {
@@ -122,10 +123,14 @@
     if (!self.popGestureRecognizerEnable) {
         return NO;
     }
-    if (self.childViewControllers.count<=1) {
+    if (self.childViewControllers.count <= 1) {
         return NO;
     }
     return YES;
+}
+
+- (void)requireGestureRecognizerToFailByScrollView:(UIScrollView *)scrollView {
+    [scrollView.panGestureRecognizer requireGestureRecognizerToFail:_panGestureRecognizer];
 }
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
