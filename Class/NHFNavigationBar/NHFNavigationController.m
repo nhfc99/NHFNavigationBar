@@ -11,16 +11,27 @@
 #import "NHFNavigationController.h"
 #import "UINavigationBar+NHF.h"
 #import "UIViewController+NHF.h"
+#import "NHFCustomDispatchQueue.h"
 
 @interface NHFNavigationController () <UIGestureRecognizerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray *lastVCScreenShootArray;
 @property (nonatomic, strong) UIImageView *lastVCScreenShootImageView;
 @property (nonatomic, strong) UIView *lastVCScreenCoverView;
+@property (nonatomic, strong) UIImageView *screenImageView;
 
 @end
 
 @implementation NHFNavigationController
+
+- (UIImageView *)screenImageView {
+    if (_screenImageView == nil) {
+        _screenImageView = [UIImageView new];
+        _screenImageView.frame = CGRectMake(100, 400, 100, 100);
+        [[UIApplication sharedApplication].keyWindow addSubview:_screenImageView];
+    }
+    return _screenImageView;
+}
 
 //截频资源
 - (NSMutableArray *)lastVCScreenShootArray {
@@ -32,12 +43,19 @@
 
 //进行截频
 - (void)takeScreenShoot {
-//    UIGraphicsBeginImageContextWithOptions(self.view.bounds.size,NO,0);
-//    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
-//    UIImage * newScreenSnapImg = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
+    //    UIGraphicsBeginImageContextWithOptions(self.view.bounds.size,NO,0);
+    //    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    //    UIImage * newScreenSnapImg = UIGraphicsGetImageFromCurrentImageContext();
+    //    UIGraphicsEndImageContext();
     
-    UIImage * newScreenSnapImg = [UIImage imageWithData:[self imageDataScreenShot]];
+    //    [NHFCustomDispatchQueue dispatchByGlobal_mainqueue:^{
+    //        UIImage * newScreenSnapImg = [UIImage imageWithData:[self imageDataScreenShot]];
+    //        self.screenImageView.image = newScreenSnapImg;
+    //        [self.lastVCScreenShootArray addObject:newScreenSnapImg];
+    //    }];
+    
+    
+    UIImage *newScreenSnapImg = [UIImage imageWithData:[self imageDataScreenShot]];
     [self.lastVCScreenShootArray addObject:newScreenSnapImg];
 }
 
@@ -68,21 +86,17 @@
 
 //最后一张截频
 - (UIImageView *)lastVCScreenShootImageView {
-    if (!_lastVCScreenShootImageView) {
-        UIImageView *shootImageView = [[UIImageView alloc] init];
-        shootImageView.frame = self.view.bounds;
-        
-        [self.view.superview addSubview:shootImageView];
-        [self.view.superview insertSubview:shootImageView atIndex:0];
-        
-        [self.view.superview insertSubview:self.lastVCScreenCoverView atIndex:1];
-        _lastVCScreenShootImageView = shootImageView;
-    }
-    
+    [_lastVCScreenShootImageView removeFromSuperview];
+    UIImageView *shootImageView = [[UIImageView alloc] init];
+    shootImageView.alpha= 0;
+    shootImageView.frame = self.view.bounds;
+    [self.view.superview insertSubview:shootImageView atIndex:0];
+    [self.view.superview insertSubview:self.lastVCScreenCoverView atIndex:1];
+    _lastVCScreenShootImageView = shootImageView;
     return _lastVCScreenShootImageView;
 }
 
-//图片上边的一张图片
+//图片上边的一个视图
 - (UIView *)lastVCScreenCoverView {
     if (!_lastVCScreenCoverView) {
         UIView *converView = [[UIView alloc] init];
@@ -118,12 +132,16 @@
 - (void)popViewController:(UIPanGestureRecognizer *)recognizer {
     CGPoint transition = [recognizer translationInView:self.view];
     if (transition.x > 0) {
+        UIImageView *lastVCScreenShootImageView = _lastVCScreenShootImageView;
+        lastVCScreenShootImageView.alpha = 1;
+        
         self.view.transform = CGAffineTransformMakeTranslation(transition.x, 0);
-//        UIImage *lastImage = [self.lastVCScreenShootArray lastObject];
         
         NSInteger curItem = [self.viewControllers indexOfObjectIdenticalTo:self.topViewController];
-        UIImage *lastImage = [self.lastVCScreenShootArray objectAtIndex:curItem];
-        self.lastVCScreenShootImageView.image = lastImage;
+        if (self.lastVCScreenShootArray.count > curItem) {
+            UIImage *lastImage = [self.lastVCScreenShootArray objectAtIndex:curItem];
+            lastVCScreenShootImageView.image = lastImage;
+        }
         self.lastVCScreenCoverView.alpha = NHFCoverAlpha * (1 - transition.x / self.view.frame.size.width);
         
         if (recognizer.state == UIGestureRecognizerStateEnded) {
@@ -136,7 +154,6 @@
                     [super popViewControllerAnimated:NO];
                     
                     self.lastVCScreenShootArray = [[NSMutableArray alloc] initWithArray:[self.lastVCScreenShootArray subarrayWithRange:NSMakeRange(0, curItem)]];
-//                    [self.lastVCScreenShootArray removeLastObject];
                 }];
             } else {
                 [UIView animateWithDuration:0.25 animations:^{
@@ -165,8 +182,12 @@
 }
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    //截频
     [self takeScreenShoot];
+    //跳转
     [super pushViewController:viewController animated:animated];
+    //更新视图
+    [self lastVCScreenShootImageView];
 }
 
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated{
