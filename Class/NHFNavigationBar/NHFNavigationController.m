@@ -32,11 +32,38 @@
 
 //进行截频
 - (void)takeScreenShoot {
-    UIGraphicsBeginImageContextWithOptions(self.view.bounds.size,NO,0);
-    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage * newScreenSnapImg = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+//    UIGraphicsBeginImageContextWithOptions(self.view.bounds.size,NO,0);
+//    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
+//    UIImage * newScreenSnapImg = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+    
+    UIImage * newScreenSnapImg = [UIImage imageWithData:[self imageDataScreenShot]];
     [self.lastVCScreenShootArray addObject:newScreenSnapImg];
+}
+
+- (NSData *)imageDataScreenShot {
+    CGSize imageSize = CGSizeZero;
+    imageSize = [UIScreen mainScreen].bounds.size;
+    
+    UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    for (UIWindow *window in [[UIApplication sharedApplication] windows]) {
+        CGContextSaveGState(context);
+        CGContextTranslateCTM(context, window.center.x, window.center.y);
+        CGContextConcatCTM(context, window.transform);
+        CGContextTranslateCTM(context, -window.bounds.size.width * window.layer.anchorPoint.x, -window.bounds.size.height * window.layer.anchorPoint.y);
+        if ([window respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)]) {
+            [window drawViewHierarchyInRect:window.bounds afterScreenUpdates:YES];
+        } else {
+            [window.layer renderInContext:context];
+        }
+        CGContextRestoreGState(context);
+    }
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return UIImagePNGRepresentation(image);
 }
 
 //最后一张截频
@@ -92,8 +119,11 @@
     CGPoint transition = [recognizer translationInView:self.view];
     if (transition.x > 0) {
         self.view.transform = CGAffineTransformMakeTranslation(transition.x, 0);
-        self.lastVCScreenShootImageView.image = [self.lastVCScreenShootArray lastObject];
+//        UIImage *lastImage = [self.lastVCScreenShootArray lastObject];
         
+        NSInteger curItem = [self.viewControllers indexOfObjectIdenticalTo:self.topViewController];
+        UIImage *lastImage = [self.lastVCScreenShootArray objectAtIndex:curItem];
+        self.lastVCScreenShootImageView.image = lastImage;
         self.lastVCScreenCoverView.alpha = NHFCoverAlpha * (1 - transition.x / self.view.frame.size.width);
         
         if (recognizer.state == UIGestureRecognizerStateEnded) {
@@ -105,14 +135,15 @@
                     self.view.transform = CGAffineTransformIdentity;
                     [super popViewControllerAnimated:NO];
                     
-                    [self.lastVCScreenShootArray removeLastObject];
+                    self.lastVCScreenShootArray = [[NSMutableArray alloc] initWithArray:[self.lastVCScreenShootArray subarrayWithRange:NSMakeRange(0, curItem)]];
+//                    [self.lastVCScreenShootArray removeLastObject];
                 }];
             } else {
                 [UIView animateWithDuration:0.25 animations:^{
                     self.lastVCScreenCoverView.alpha = NHFCoverAlpha;
                     self.view.transform = CGAffineTransformIdentity;
                 } completion:^(BOOL finished) {
-                    
+                    self.view.transform = CGAffineTransformIdentity;
                 }];
             }
         }
