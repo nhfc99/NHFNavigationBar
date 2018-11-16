@@ -11,7 +11,6 @@
 #import "NHFNavigationController.h"
 #import "UINavigationBar+NHF.h"
 #import "UIViewController+NHF.h"
-#import "NHFCustomDispatchQueue.h"
 
 @interface NHFNavigationController () <UIGestureRecognizerDelegate, UINavigationControllerDelegate>
 
@@ -43,18 +42,6 @@
 
 //进行截频
 - (void)takeScreenShoot {
-    //    UIGraphicsBeginImageContextWithOptions(self.view.bounds.size,NO,0);
-    //    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
-    //    UIImage * newScreenSnapImg = UIGraphicsGetImageFromCurrentImageContext();
-    //    UIGraphicsEndImageContext();
-    
-    //    [NHFCustomDispatchQueue dispatchByGlobal_mainqueue:^{
-    //        UIImage * newScreenSnapImg = [UIImage imageWithData:[self imageDataScreenShot]];
-    //        self.screenImageView.image = newScreenSnapImg;
-    //        [self.lastVCScreenShootArray addObject:newScreenSnapImg];
-    //    }];
-    
-    
     UIImage *newScreenSnapImg = [UIImage imageWithData:[self imageDataScreenShot]];
     [self.lastVCScreenShootArray addObject:newScreenSnapImg];
 }
@@ -201,13 +188,3 @@
 }
 
 @end
-
-
-
-
-
-
-
-
-
-
