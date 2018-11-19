@@ -102,7 +102,8 @@
     // Do any additional setup after loading the view.
     
     self.interactivePopGestureRecognizer.delegate = self;
-    [self.navigationBar setTranslucent:YES];
+    //这个地方自己本地进行设置
+//    [self.navigationBar setTranslucent:YES];
     
     self.interactivePopGestureRecognizer.enabled = NO;
     [self addPanGestureRecognizer];
