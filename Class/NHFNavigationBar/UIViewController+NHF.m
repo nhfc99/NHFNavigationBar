@@ -48,6 +48,12 @@ static const NSInteger fontSize = 17;
     [self.navigationController.navigationBar setBackgroundImage:curImage forBarMetrics:UIBarMetricsDefault];
 }
 
+- (void)setNhfBarBackgroundImage:(UIImage *)image alpha:(CGFloat)alpha translucent:(BOOL)translucent {
+    //设置背景是否透明
+    [self.navigationController.navigationBar setTranslucent:translucent];
+    [self setNhfBarBackgroundImage:image alpha:alpha];
+}
+
 - (void)setNhfBarTintColor:(UIColor *)color alpha:(CGFloat)alpha {
     UIImage *curImage = [UIImage nhfImageWithColor:color];
     if (alpha != 1 &&
@@ -64,6 +70,12 @@ static const NSInteger fontSize = 17;
     self.nhfBarTintColor = color;
     //设置
     [self.navigationController.navigationBar setBackgroundImage:curImage forBarMetrics:UIBarMetricsDefault];
+}
+
+- (void)setNhfBarTintColor:(UIColor *)color alpha:(CGFloat)alpha translucent:(BOOL)translucent {
+    //设置背景是否透明
+    [self.navigationController.navigationBar setTranslucent:translucent];
+    [self setNhfBarTintColor:color alpha:alpha];
 }
 
 - (void)setNhfBarBackgroundImage:(UIImage *)nhfBarBackgroundImage {

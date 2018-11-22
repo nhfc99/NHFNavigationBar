@@ -42,12 +42,31 @@
 
 
 /**
+ 设置导航栏背景颜色（单一色调）以及透明度 以及背景是否透明
+
+ @param color --
+ @param alpha --
+ @param translucent --
+ */
+- (void)setNhfBarTintColor:(UIColor *)color alpha:(CGFloat)alpha translucent:(BOOL)translucent;
+
+/**
  设置导航栏背景图片以及透明度
 
  @param image --
  @param alpha --
  */
 - (void)setNhfBarBackgroundImage:(UIImage *)image alpha:(CGFloat)alpha;
+
+
+/**
+ 设置导航栏背景图片以及透明度 以及背景是否透明
+
+ @param image --
+ @param alpha --
+ @param translucent --
+ */
+- (void)setNhfBarBackgroundImage:(UIImage *)image alpha:(CGFloat)alpha translucent:(BOOL)translucent;
 
 //左边
 /**
