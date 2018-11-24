@@ -117,13 +117,14 @@ static const NSInteger fontSize = 17;
 - (UIColor *)nhfBarTintColor {
     return objc_getAssociatedObject(self, kNhfBarTintColor);
 }
-
-- (void)setPopGestureRecognizerEnable:(BOOL)popGestureRecognizerEnable {
-    ((NHFNavigationController *)self.navigationController).popGestureRecognizerEnable = popGestureRecognizerEnable;
-    objc_setAssociatedObject(self, kPopGestureRecognizerEnable, [NSNumber numberWithBool:popGestureRecognizerEnable],OBJC_ASSOCIATION_ASSIGN);
+- (void)setPopGestureRecognizerEnabled:(BOOL)popGestureRecognizerEnabled {
+    if (self.navigationController) {
+        ((NHFNavigationController *)self.navigationController).popGestureRecognizerEnabled = popGestureRecognizerEnabled;
+    }
+    objc_setAssociatedObject(self, kPopGestureRecognizerEnable, [NSNumber numberWithBool:popGestureRecognizerEnabled],OBJC_ASSOCIATION_ASSIGN);
 }
 
-- (BOOL)popGestureRecognizerEnable {
+- (BOOL)popGestureRecognizerEnabled {
     NSNumber *number = objc_getAssociatedObject(self, kPopGestureRecognizerEnable);
     return [number boolValue];
 }

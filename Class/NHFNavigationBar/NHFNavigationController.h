@@ -16,7 +16,7 @@
 /**
  解决手势冲突问题
 
- @param view
+ @param view --
  */
 - (void)requireGestureRecognizerToFailByScrollView:(UIScrollView *)scrollView;
 

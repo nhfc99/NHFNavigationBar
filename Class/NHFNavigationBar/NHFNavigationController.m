@@ -134,7 +134,7 @@
         
         if (recognizer.state == UIGestureRecognizerStateEnded) {
             if (transition.x > self.view.frame.size.width / 3) {
-                [UIView animateWithDuration:0.25 animations:^{
+                [UIView animateWithDuration:0.15 animations:^{
                     self.lastVCScreenCoverView.alpha = 0;
                     self.view.transform = CGAffineTransformMakeTranslation(self.view.frame.size.width, 0);
                 } completion:^(BOOL finished) {
@@ -144,7 +144,7 @@
                     self.lastVCScreenShootArray = [[NSMutableArray alloc] initWithArray:[self.lastVCScreenShootArray subarrayWithRange:NSMakeRange(0, curItem)]];
                 }];
             } else {
-                [UIView animateWithDuration:0.25 animations:^{
+                [UIView animateWithDuration:0.15 animations:^{
                     self.lastVCScreenCoverView.alpha = NHFCoverAlpha;
                     self.view.transform = CGAffineTransformIdentity;
                 } completion:^(BOOL finished) {
@@ -156,7 +156,7 @@
 }
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
-    if (!self.popGestureRecognizerEnable) {
+    if (!self.popGestureRecognizerEnabled) {
         return NO;
     }
     if (self.childViewControllers.count <= 1) {

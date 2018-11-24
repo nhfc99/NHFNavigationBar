@@ -19,7 +19,7 @@
 //TitleColor
 @property (nonatomic, strong) UIColor *nhfTitleColor;
 //控制滑动返回
-@property (nonatomic, assign) BOOL popGestureRecognizerEnable;
+@property (nonatomic, assign) BOOL popGestureRecognizerEnabled;
 //是否隐藏导航栏底部的线条
 @property (nonatomic, assign) CGFloat nhfShadowImageAlpha;
 //设置标题属性
