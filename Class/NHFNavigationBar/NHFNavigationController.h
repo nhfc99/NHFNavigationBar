@@ -8,7 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol NHFNavigationControllerDelegate
+
+@optional
+- (void)setNHFNavigationBarAlpha:(CGFloat)alpha;
+
+@end
+
 @interface NHFNavigationController : UINavigationController
+
+@property (nonatomic, weak) id<NHFNavigationControllerDelegate> nhfDelegate;
 
 @property (nonatomic, retain) UIScreenEdgePanGestureRecognizer *panGestureRecognizer;
 

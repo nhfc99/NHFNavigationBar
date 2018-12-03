@@ -107,6 +107,8 @@
     
     self.interactivePopGestureRecognizer.enabled = NO;
     [self addPanGestureRecognizer];
+    
+    [self.navigationBar addObserver:self forKeyPath:@"alpha" options:NSKeyValueObservingOptionNew context:@"BaseViewController"];
 }
 
 //添加手势
@@ -186,6 +188,21 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"alpha"]) {
+        CGFloat alpha = [change[@"new"] floatValue];
+        alpha = round(alpha * 100) / 100;
+        if (_nhfDelegate) {
+            [_nhfDelegate setNHFNavigationBarAlpha:alpha];
+        }
+    }
+}
+
+- (void)dealloc
+{
+    [self.navigationController.navigationBar removeObserver:self forKeyPath:@"alpha" context:@"BaseViewController"];
 }
 
 @end

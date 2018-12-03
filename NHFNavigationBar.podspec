@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = "NHFNavigationBar"
-    s.version      = "1.0.14"
+    s.version      = "1.0.15"
     s.summary      = "UINavigationBar的集合操作"
     s.homepage     = "https://github.com/nhfc99/NHFNavigationBar.git"
     s.license      = "MIT"
