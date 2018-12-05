@@ -120,38 +120,40 @@
 }
 
 - (void)popViewController:(UIPanGestureRecognizer *)recognizer {
-    CGPoint transition = [recognizer translationInView:self.view];
-    if (transition.x > 0) {
-        UIImageView *lastVCScreenShootImageView = _lastVCScreenShootImageView;
-        lastVCScreenShootImageView.alpha = 1;
-        
-        self.view.transform = CGAffineTransformMakeTranslation(transition.x, 0);
-        
-        NSInteger curItem = [self.viewControllers indexOfObjectIdenticalTo:self.topViewController];
-        if (self.lastVCScreenShootArray.count > curItem) {
-            UIImage *lastImage = [self.lastVCScreenShootArray objectAtIndex:curItem];
-            lastVCScreenShootImageView.image = lastImage;
-        }
-        self.lastVCScreenCoverView.alpha = NHFCoverAlpha * (1 - transition.x / self.view.frame.size.width);
-        
-        if (recognizer.state == UIGestureRecognizerStateEnded) {
-            if (transition.x > self.view.frame.size.width / 3) {
-                [UIView animateWithDuration:0.15 animations:^{
-                    self.lastVCScreenCoverView.alpha = 0;
-                    self.view.transform = CGAffineTransformMakeTranslation(self.view.frame.size.width, 0);
-                } completion:^(BOOL finished) {
-                    self.view.transform = CGAffineTransformIdentity;
-                    [super popViewControllerAnimated:NO];
-                    
-                    self.lastVCScreenShootArray = [[NSMutableArray alloc] initWithArray:[self.lastVCScreenShootArray subarrayWithRange:NSMakeRange(0, curItem)]];
-                }];
-            } else {
-                [UIView animateWithDuration:0.15 animations:^{
-                    self.lastVCScreenCoverView.alpha = NHFCoverAlpha;
-                    self.view.transform = CGAffineTransformIdentity;
-                } completion:^(BOOL finished) {
-                    self.view.transform = CGAffineTransformIdentity;
-                }];
+    @synchronized (self) {
+        CGPoint transition = [recognizer translationInView:self.view];
+        if (transition.x > 0) {
+            UIImageView *lastVCScreenShootImageView = _lastVCScreenShootImageView;
+            lastVCScreenShootImageView.alpha = 1;
+            
+            self.view.transform = CGAffineTransformMakeTranslation(transition.x, 0);
+            
+            NSInteger curItem = [self.viewControllers indexOfObjectIdenticalTo:self.topViewController];
+            if (self.lastVCScreenShootArray.count > curItem) {
+                UIImage *lastImage = [self.lastVCScreenShootArray objectAtIndex:curItem];
+                lastVCScreenShootImageView.image = lastImage;
+            }
+            self.lastVCScreenCoverView.alpha = NHFCoverAlpha * (1 - transition.x / self.view.frame.size.width);
+            
+            if (recognizer.state == UIGestureRecognizerStateEnded) {
+                if (transition.x > self.view.frame.size.width / 3) {
+                    [UIView animateWithDuration:0.15 animations:^{
+                        self.lastVCScreenCoverView.alpha = 0;
+                        self.view.transform = CGAffineTransformMakeTranslation(self.view.frame.size.width, 0);
+                    } completion:^(BOOL finished) {
+                        self.view.transform = CGAffineTransformIdentity;
+                        [super popViewControllerAnimated:NO];
+                        
+                        self.lastVCScreenShootArray = [[NSMutableArray alloc] initWithArray:[self.lastVCScreenShootArray subarrayWithRange:NSMakeRange(0, curItem)]];
+                    }];
+                } else {
+                    [UIView animateWithDuration:0.15 animations:^{
+                        self.lastVCScreenCoverView.alpha = NHFCoverAlpha;
+                        self.view.transform = CGAffineTransformIdentity;
+                    } completion:^(BOOL finished) {
+                        self.view.transform = CGAffineTransformIdentity;
+                    }];
+                }
             }
         }
     }
