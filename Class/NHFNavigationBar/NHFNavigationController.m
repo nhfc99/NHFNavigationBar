@@ -149,9 +149,11 @@
                 } else {
                     [UIView animateWithDuration:0.15 animations:^{
                         self.lastVCScreenCoverView.alpha = NHFCoverAlpha;
-                        self.view.transform = CGAffineTransformIdentity;
+                        //                        self.view.transform = CGAffineTransformIdentity;
+                        self.view.transform = CGAffineTransformMakeTranslation(0, 0);
                     } completion:^(BOOL finished) {
-                        self.view.transform = CGAffineTransformIdentity;
+                        //                        self.view.transform = CGAffineTransformIdentity;
+                        self.view.transform = CGAffineTransformMakeTranslation(0, 0);
                     }];
                 }
             }
