@@ -7,6 +7,7 @@
 //
 
 #define  NHFCoverAlpha 0.8
+#define  NHFNaDuration 0.2f
 
 #import "NHFNavigationController.h"
 #import "UINavigationBar+NHF.h"
@@ -15,22 +16,15 @@
 @interface NHFNavigationController () <UIGestureRecognizerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray *lastVCScreenShootArray;
-@property (nonatomic, strong) UIImageView *lastVCScreenShootImageView;
 @property (nonatomic, strong) UIView *lastVCScreenCoverView;
-@property (nonatomic, strong) UIImageView *screenImageView;
+
+@property (strong, nonatomic) UIImageView *backImageView;
+@property (assign) CGPoint panBeginPoint;
+@property (assign) CGPoint panEndPoint;
 
 @end
 
 @implementation NHFNavigationController
-
-- (UIImageView *)screenImageView {
-    if (_screenImageView == nil) {
-        _screenImageView = [UIImageView new];
-        _screenImageView.frame = CGRectMake(100, 400, 100, 100);
-        [[UIApplication sharedApplication].keyWindow addSubview:_screenImageView];
-    }
-    return _screenImageView;
-}
 
 //截频资源
 - (NSMutableArray *)lastVCScreenShootArray {
@@ -71,18 +65,6 @@
     return UIImagePNGRepresentation(image);
 }
 
-//最后一张截频
-- (UIImageView *)lastVCScreenShootImageView {
-    [_lastVCScreenShootImageView removeFromSuperview];
-    UIImageView *shootImageView = [[UIImageView alloc] init];
-    shootImageView.alpha= 0;
-    shootImageView.frame = self.view.bounds;
-    [self.view.superview insertSubview:shootImageView atIndex:0];
-    [self.view.superview insertSubview:self.lastVCScreenCoverView atIndex:1];
-    _lastVCScreenShootImageView = shootImageView;
-    return _lastVCScreenShootImageView;
-}
-
 //图片上边的一个视图
 - (UIView *)lastVCScreenCoverView {
     if (!_lastVCScreenCoverView) {
@@ -102,9 +84,6 @@
     // Do any additional setup after loading the view.
     
     self.interactivePopGestureRecognizer.delegate = self;
-    //这个地方自己本地进行设置
-//    [self.navigationBar setTranslucent:YES];
-    
     self.interactivePopGestureRecognizer.enabled = NO;
     [self addPanGestureRecognizer];
     
@@ -119,44 +98,38 @@
     [self.view addGestureRecognizer:_panGestureRecognizer];
 }
 
+//滑动返回操作
 - (void)popViewController:(UIPanGestureRecognizer *)recognizer {
-    @synchronized (self) {
-        CGPoint transition = [recognizer translationInView:self.view];
-        if (transition.x > 0) {
-            UIImageView *lastVCScreenShootImageView = _lastVCScreenShootImageView;
-            lastVCScreenShootImageView.alpha = 1;
-            
-            self.view.transform = CGAffineTransformMakeTranslation(transition.x, 0);
-            
-            NSInteger curItem = [self.viewControllers indexOfObjectIdenticalTo:self.topViewController];
-            if (self.lastVCScreenShootArray.count > curItem) {
-                UIImage *lastImage = [self.lastVCScreenShootArray objectAtIndex:curItem];
-                lastVCScreenShootImageView.image = lastImage;
-            }
-            self.lastVCScreenCoverView.alpha = NHFCoverAlpha * (1 - transition.x / self.view.frame.size.width);
-            
-            if (recognizer.state == UIGestureRecognizerStateEnded) {
-                if (transition.x > self.view.frame.size.width / 3) {
-                    [UIView animateWithDuration:0.15 animations:^{
-                        self.lastVCScreenCoverView.alpha = 0;
-                        self.view.transform = CGAffineTransformMakeTranslation(self.view.frame.size.width, 0);
-                    } completion:^(BOOL finished) {
-                        self.view.transform = CGAffineTransformIdentity;
-                        [super popViewControllerAnimated:NO];
-                        
-                        self.lastVCScreenShootArray = [[NSMutableArray alloc] initWithArray:[self.lastVCScreenShootArray subarrayWithRange:NSMakeRange(0, curItem)]];
-                    }];
-                } else {
-                    [UIView animateWithDuration:0.15 animations:^{
-                        self.lastVCScreenCoverView.alpha = NHFCoverAlpha;
-                        //                        self.view.transform = CGAffineTransformIdentity;
-                        self.view.transform = CGAffineTransformMakeTranslation(0, 0);
-                    } completion:^(BOOL finished) {
-                        //                        self.view.transform = CGAffineTransformIdentity;
-                        self.view.transform = CGAffineTransformMakeTranslation(0, 0);
-                    }];
-                }
-            }
+    if ([self.viewControllers count] == 1) {
+        return ;
+    }
+    
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
+        //存放滑动开始的位置
+        self.panBeginPoint = [recognizer locationInView:[UIApplication sharedApplication].keyWindow];
+        //插入图片
+        [self insertLastViewFromSuperView:self.view.superview];
+    }else if(recognizer.state == UIGestureRecognizerStateEnded){
+        //存放数据
+        self.panEndPoint = [recognizer locationInView:[UIApplication sharedApplication].keyWindow];
+        if ((_panEndPoint.x - _panBeginPoint.x) > self.view.frame.size.width / 3) {
+            [UIView animateWithDuration:NHFNaDuration animations:^{
+                [self moveNavigationViewWithLenght:[UIScreen mainScreen].bounds.size.width];
+            } completion:^(BOOL finished) {
+                [self removeLastViewFromSuperView];
+                [self moveNavigationViewWithLenght:0];
+                [self popViewControllerAnimated:NO];
+            }];
+        }else{
+            [UIView animateWithDuration:NHFNaDuration animations:^{
+                [self moveNavigationViewWithLenght:0];
+            }];
+        }
+    }else{
+        //添加移动效果
+        CGFloat panLength = ([recognizer locationInView:[UIApplication sharedApplication].keyWindow].x - _panBeginPoint.x);
+        if (panLength > 0) {
+            [self moveNavigationViewWithLenght:panLength];
         }
     }
 }
@@ -180,11 +153,9 @@
     [self takeScreenShoot];
     //跳转
     [super pushViewController:viewController animated:animated];
-    //更新视图
-    [self lastVCScreenShootImageView];
 }
 
-- (UIViewController *)popViewControllerAnimated:(BOOL)animated{
+- (UIViewController *)popViewControllerAnimated:(BOOL)animated {
     [self.lastVCScreenShootArray removeLastObject];
     return [super popViewControllerAnimated:animated];
 }
@@ -207,6 +178,51 @@
 - (void)dealloc
 {
     [self.navigationController.navigationBar removeObserver:self forKeyPath:@"alpha" context:@"BaseViewController"];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ *  移动视图界面
+ *
+ *  @param lenght 移动的长度
+ */
+- (void)moveNavigationViewWithLenght:(CGFloat)lenght {
+    //图片位置设置
+    self.view.frame = CGRectMake(lenght, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
+    //图片动态阴影
+    _backImageView.alpha = (lenght/[UIScreen mainScreen].bounds.size.width)*2/3 + 0.33;
+}
+
+/**
+ *  插图上一级图片
+ *
+ *  @param superView 图片的superView
+ */
+- (void)insertLastViewFromSuperView:(UIView *)superView{
+    //插入上一级视图背景
+    if (_backImageView == nil) {
+        _backImageView = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        _backImageView.image = [_lastVCScreenShootArray lastObject];;
+    }
+    [self.view.superview insertSubview:_backImageView belowSubview:self.view];
+}
+
+/**
+ *  移除上一级图片
+ */
+- (void)removeLastViewFromSuperView{
+    [_backImageView removeFromSuperview];
+    _backImageView = nil;
 }
 
 @end
