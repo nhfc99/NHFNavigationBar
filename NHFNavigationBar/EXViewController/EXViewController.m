@@ -18,7 +18,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    self.popGestureRecognizerEnable = true;
+    self.popGestureRecognizerEnabled = true;
     [self setNhfBarTintColor:[UIColor whiteColor] alpha:1.f];
 }
 

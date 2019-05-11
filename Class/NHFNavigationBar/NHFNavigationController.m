@@ -18,7 +18,8 @@
 @property (nonatomic, strong) NSMutableArray *lastVCScreenShootArray;
 @property (nonatomic, strong) UIView *lastVCScreenCoverView;
 
-@property (strong, nonatomic) UIImageView *backImageView;
+//@property (strong, nonatomic) UIImageView *backImageView;
+@property (strong, nonatomic) UIView *backView;
 @property (assign) CGPoint panBeginPoint;
 @property (assign) CGPoint panEndPoint;
 
@@ -34,35 +35,10 @@
     return _lastVCScreenShootArray;
 }
 
-//进行截频
+//进行截屏
 - (void)takeScreenShoot {
-    UIImage *newScreenSnapImg = [UIImage imageWithData:[self imageDataScreenShot]];
-    [self.lastVCScreenShootArray addObject:newScreenSnapImg];
-}
-
-- (NSData *)imageDataScreenShot {
-    CGSize imageSize = CGSizeZero;
-    imageSize = [UIScreen mainScreen].bounds.size;
-    
-    UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    for (UIWindow *window in [[UIApplication sharedApplication] windows]) {
-        CGContextSaveGState(context);
-        CGContextTranslateCTM(context, window.center.x, window.center.y);
-        CGContextConcatCTM(context, window.transform);
-        CGContextTranslateCTM(context, -window.bounds.size.width * window.layer.anchorPoint.x, -window.bounds.size.height * window.layer.anchorPoint.y);
-        if ([window respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)]) {
-            [window drawViewHierarchyInRect:window.bounds afterScreenUpdates:YES];
-        } else {
-            [window.layer renderInContext:context];
-        }
-        CGContextRestoreGState(context);
-    }
-    
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return UIImagePNGRepresentation(image);
+    UIView *view = [[UIScreen mainScreen] snapshotViewAfterScreenUpdates:NO];
+    [self.lastVCScreenShootArray addObject:view];
 }
 
 //图片上边的一个视图
@@ -112,9 +88,9 @@
     }else if(recognizer.state == UIGestureRecognizerStateEnded){
         //存放数据
         self.panEndPoint = [recognizer locationInView:[UIApplication sharedApplication].keyWindow];
-        if ((_panEndPoint.x - _panBeginPoint.x) > self.view.frame.size.width / 3) {
+        if ((_panEndPoint.x - _panBeginPoint.x) > CGRectGetWidth(self.view.frame) / 3) {
             [UIView animateWithDuration:NHFNaDuration animations:^{
-                [self moveNavigationViewWithLenght:[UIScreen mainScreen].bounds.size.width];
+                [self moveNavigationViewWithLenght:CGRectGetWidth([UIScreen mainScreen].bounds)];
             } completion:^(BOOL finished) {
                 [self removeLastViewFromSuperView];
                 [self moveNavigationViewWithLenght:0];
@@ -175,22 +151,6 @@
     }
 }
 
-- (void)dealloc
-{
-    [self.navigationController.navigationBar removeObserver:self forKeyPath:@"alpha" context:@"BaseViewController"];
-}
-
-
-
-
-
-
-
-
-
-
-
-
 /**
  *  移动视图界面
  *
@@ -198,9 +158,9 @@
  */
 - (void)moveNavigationViewWithLenght:(CGFloat)lenght {
     //图片位置设置
-    self.view.frame = CGRectMake(lenght, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
+    self.view.frame = CGRectMake(lenght, CGRectGetMinY(self.view.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
     //图片动态阴影
-    _backImageView.alpha = (lenght/[UIScreen mainScreen].bounds.size.width)*2/3 + 0.33;
+    _backView.alpha = (lenght/CGRectGetWidth([UIScreen mainScreen].bounds))*2/3 + 0.33;
 }
 
 /**
@@ -210,19 +170,24 @@
  */
 - (void)insertLastViewFromSuperView:(UIView *)superView{
     //插入上一级视图背景
-    if (_backImageView == nil) {
-        _backImageView = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-        _backImageView.image = [_lastVCScreenShootArray lastObject];;
+    if (_backView == nil) {
+        _backView = [_lastVCScreenShootArray lastObject];
+        _backView.frame = [UIScreen mainScreen].bounds;
     }
-    [self.view.superview insertSubview:_backImageView belowSubview:self.view];
+    [self.view.superview insertSubview:_backView belowSubview:self.view];
 }
 
 /**
  *  移除上一级图片
  */
-- (void)removeLastViewFromSuperView{
-    [_backImageView removeFromSuperview];
-    _backImageView = nil;
+- (void)removeLastViewFromSuperView {
+    [_backView removeFromSuperview];
+    _backView = nil;
+}
+
+- (void)dealloc
+{
+    [self.navigationController.navigationBar removeObserver:self forKeyPath:@"alpha" context:@"BaseViewController"];
 }
 
 @end
