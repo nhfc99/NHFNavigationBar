@@ -38,7 +38,7 @@
 //进行截屏
 - (void)takeScreenShoot {
     UIView *view = [[UIScreen mainScreen] snapshotViewAfterScreenUpdates:NO];
-    [self.lastVCScreenShootArray addObject:view];
+    [self.lastVCScreenShootArray addObject:@{[NSString stringWithFormat:@"%p", self.topViewController]:view}];
 }
 
 //图片上边的一个视图
@@ -132,7 +132,21 @@
 }
 
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated {
-    [self.lastVCScreenShootArray removeLastObject];
+    NSInteger item = NSNotFound;
+    if (self.viewControllers.count > (self.viewControllers.count - 2)) {
+        NSString *keyString = [NSString stringWithFormat:@"%p", self.viewControllers[self.viewControllers.count - 2]];
+        for (int i=0; i<_lastVCScreenShootArray.count; i++) {
+            NSDictionary *dic = _lastVCScreenShootArray[i];
+            if ([dic.allKeys.firstObject isEqualToString:keyString]) {
+                item = i;
+            }
+        }
+    }
+    if (item != NSNotFound) {
+        NSInteger number = (_lastVCScreenShootArray.count-item);
+        number = number<0?0:number;
+        [_lastVCScreenShootArray removeObjectsInRange:NSMakeRange(item, number)];
+    }
     return [super popViewControllerAnimated:animated];
 }
 
@@ -171,7 +185,18 @@
 - (void)insertLastViewFromSuperView:(UIView *)superView{
     //插入上一级视图背景
     if (_backView == nil) {
-        _backView = [_lastVCScreenShootArray lastObject];
+        if (self.viewControllers.count > (self.viewControllers.count - 2)) {
+            NSString *keyString = [NSString stringWithFormat:@"%p", self.viewControllers[self.viewControllers.count - 2]];
+            for (NSDictionary *dic in _lastVCScreenShootArray) {
+                if ([dic.allKeys.firstObject isEqualToString:keyString]) {
+                    _backView = dic.allValues.firstObject;
+                }
+            }
+        }
+        if (_backView == nil) {
+            _backView = ((NSDictionary *)_lastVCScreenShootArray.lastObject).allValues.firstObject;
+        }
+        
         _backView.frame = [UIScreen mainScreen].bounds;
     }
     [self.view.superview insertSubview:_backView belowSubview:self.view];

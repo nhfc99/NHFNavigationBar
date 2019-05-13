@@ -18,6 +18,11 @@
 		60917572212CF16D00BBCA70 /* UINavigationBar+NHF.m in Sources */ = {isa = PBXBuildFile; fileRef = 6091756D212CF16D00BBCA70 /* UINavigationBar+NHF.m */; };
 		60917573212CF16D00BBCA70 /* UIViewController+NHF.m in Sources */ = {isa = PBXBuildFile; fileRef = 6091756E212CF16D00BBCA70 /* UIViewController+NHF.m */; };
 		60917577212CF1C200BBCA70 /* EXViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 60917576212CF1C200BBCA70 /* EXViewController.m */; };
+		89ECF88322891BE600DBC8B8 /* FirstViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89ECF88022891BE600DBC8B8 /* FirstViewController.xib */; };
+		89ECF88422891BE600DBC8B8 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89ECF88222891BE600DBC8B8 /* FirstViewController.m */; };
+		89ECF88922891E0200DBC8B8 /* SecondViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89ECF88622891E0200DBC8B8 /* SecondViewController.xib */; };
+		89ECF88A22891E0200DBC8B8 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 89ECF88822891E0200DBC8B8 /* SecondViewController.m */; };
+		89ECF88C22891EE000DBC8B8 /* EXViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89ECF88B22891EE000DBC8B8 /* EXViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +46,13 @@
 		6091756F212CF16D00BBCA70 /* NHFNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHFNavigationController.h; sourceTree = "<group>"; };
 		60917575212CF1C200BBCA70 /* EXViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EXViewController.h; sourceTree = "<group>"; };
 		60917576212CF1C200BBCA70 /* EXViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EXViewController.m; sourceTree = "<group>"; };
+		89ECF88022891BE600DBC8B8 /* FirstViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FirstViewController.xib; sourceTree = "<group>"; };
+		89ECF88122891BE600DBC8B8 /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
+		89ECF88222891BE600DBC8B8 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		89ECF88622891E0200DBC8B8 /* SecondViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecondViewController.xib; sourceTree = "<group>"; };
+		89ECF88722891E0200DBC8B8 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		89ECF88822891E0200DBC8B8 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		89ECF88B22891EE000DBC8B8 /* EXViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EXViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +86,8 @@
 		6091754F212CF14700BBCA70 /* NHFNavigationBar */ = {
 			isa = PBXGroup;
 			children = (
+				89ECF88522891DEB00DBC8B8 /* SecondViewController */,
+				89ECF87F22891B8500DBC8B8 /* FirstViewController */,
 				60917574212CF1A000BBCA70 /* EXViewController */,
 				60917550212CF14700BBCA70 /* AppDelegate.h */,
 				60917551212CF14700BBCA70 /* AppDelegate.m */,
@@ -116,8 +130,29 @@
 			children = (
 				60917575212CF1C200BBCA70 /* EXViewController.h */,
 				60917576212CF1C200BBCA70 /* EXViewController.m */,
+				89ECF88B22891EE000DBC8B8 /* EXViewController.xib */,
 			);
 			path = EXViewController;
+			sourceTree = "<group>";
+		};
+		89ECF87F22891B8500DBC8B8 /* FirstViewController */ = {
+			isa = PBXGroup;
+			children = (
+				89ECF88122891BE600DBC8B8 /* FirstViewController.h */,
+				89ECF88222891BE600DBC8B8 /* FirstViewController.m */,
+				89ECF88022891BE600DBC8B8 /* FirstViewController.xib */,
+			);
+			path = FirstViewController;
+			sourceTree = "<group>";
+		};
+		89ECF88522891DEB00DBC8B8 /* SecondViewController */ = {
+			isa = PBXGroup;
+			children = (
+				89ECF88722891E0200DBC8B8 /* SecondViewController.h */,
+				89ECF88822891E0200DBC8B8 /* SecondViewController.m */,
+				89ECF88622891E0200DBC8B8 /* SecondViewController.xib */,
+			);
+			path = SecondViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,8 +213,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				6091755D212CF14A00BBCA70 /* LaunchScreen.storyboard in Resources */,
+				89ECF88C22891EE000DBC8B8 /* EXViewController.xib in Resources */,
 				6091755A212CF14A00BBCA70 /* Assets.xcassets in Resources */,
 				60917558212CF14700BBCA70 /* Main.storyboard in Resources */,
+				89ECF88322891BE600DBC8B8 /* FirstViewController.xib in Resources */,
+				89ECF88922891E0200DBC8B8 /* SecondViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,7 +228,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89ECF88A22891E0200DBC8B8 /* SecondViewController.m in Sources */,
 				60917572212CF16D00BBCA70 /* UINavigationBar+NHF.m in Sources */,
+				89ECF88422891BE600DBC8B8 /* FirstViewController.m in Sources */,
 				60917577212CF1C200BBCA70 /* EXViewController.m in Sources */,
 				60917571212CF16D00BBCA70 /* UIImage+NHF.m in Sources */,
 				60917570212CF16D00BBCA70 /* NHFNavigationController.m in Sources */,
