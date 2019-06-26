@@ -99,6 +99,8 @@
         }else{
             [UIView animateWithDuration:NHFNaDuration animations:^{
                 [self moveNavigationViewWithLenght:0];
+            } completion:^(BOOL finished) {
+                [self removeLastViewFromSuperView];
             }];
         }
     }else{
@@ -198,8 +200,8 @@
         }
         
         _backView.frame = [UIScreen mainScreen].bounds;
+        [self.view.superview insertSubview:_backView belowSubview:self.view];
     }
-    [self.view.superview insertSubview:_backView belowSubview:self.view];
 }
 
 /**
