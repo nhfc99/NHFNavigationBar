@@ -21,6 +21,11 @@
 
 @property (nonatomic, retain) UIScreenEdgePanGestureRecognizer *panGestureRecognizer;
 
+//进行截屏
+- (void)takeScreenShoot;
+
+//移除截屏
+- (void)removeScreenShoot;
 
 /**
  解决手势冲突问题

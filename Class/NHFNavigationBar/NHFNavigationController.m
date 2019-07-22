@@ -37,8 +37,30 @@
 
 //进行截屏
 - (void)takeScreenShoot {
+    if ([self shootItem] != NSNotFound) {
+        return;
+    }
     UIView *view = [[UIScreen mainScreen] snapshotViewAfterScreenUpdates:NO];
     [self.lastVCScreenShootArray addObject:@{[NSString stringWithFormat:@"%p", self.topViewController]:view}];
+}
+
+- (void)removeScreenShoot {
+    NSInteger item = [self shootItem];
+    if (item == NSNotFound) {
+        return;
+    }
+    [self.lastVCScreenShootArray removeObjectAtIndex:item];
+}
+
+- (NSInteger)shootItem {
+    NSString *memAddress = [NSString stringWithFormat:@"%p", self.topViewController];
+    for (int i=0; i<self.lastVCScreenShootArray.count; i++) {
+        NSDictionary *dic = self.lastVCScreenShootArray[i];
+        if ([dic.allKeys[0] isEqualToString:memAddress]) {
+            return i;
+        }
+    }
+    return NSNotFound;
 }
 
 //图片上边的一个视图
