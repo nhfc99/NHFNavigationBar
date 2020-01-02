@@ -77,6 +77,18 @@
     return _lastVCScreenCoverView;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.navigationBar addObserver:self forKeyPath:@"alpha" options:NSKeyValueObservingOptionNew context:@"BaseViewController"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.navigationBar removeObserver:self forKeyPath:@"alpha" context:@"BaseViewController"];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -84,8 +96,6 @@
     self.interactivePopGestureRecognizer.delegate = self;
     self.interactivePopGestureRecognizer.enabled = NO;
     [self addPanGestureRecognizer];
-    
-    [self.navigationBar addObserver:self forKeyPath:@"alpha" options:NSKeyValueObservingOptionNew context:@"BaseViewController"];
 }
 
 //添加手势
@@ -236,7 +246,7 @@
 
 - (void)dealloc
 {
-    [self.navigationController.navigationBar removeObserver:self forKeyPath:@"alpha" context:@"BaseViewController"];
+    NSLog(@"%@-%s", NSStringFromClass([self class]),__func__);
 }
 
 @end
